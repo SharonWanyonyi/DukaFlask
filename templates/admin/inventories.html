@@ -1,0 +1,181 @@
+{% extends 'base.html'%}
+
+{% block title%} Duka - Inventories {% endblock %}
+
+
+{% block content %}
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-6 mt-4 "> {% include '/includes/sidenav.html' %} </div>
+  </div>
+
+
+</div>
+
+<!-- Button trigger modal -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-7">
+
+    </div>
+    <div class="col-3">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Item
+
+      </button>
+    </div>
+
+    <div class="col-2">
+
+    </div>
+
+  </div>
+</div>
+
+<!-- modal -->
+
+<div class="col-1">
+
+</div>
+
+<div class="col-8">
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add New Inventory</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/admin/inventories" method="POST">
+            <div class=" form-floating mb-3">
+              <input type="text" required class=" form-control" name="name">
+              <label for=""> Product Name</label>
+            </div>
+
+            <div class=" form-floating mb-3">
+              <input type="text" required class=" form-control" name="quantity">
+              <label for=""> Quantity </label>
+            </div>
+
+            <div class="form-group">
+
+              <label for="select_category">Select Category</label>
+              <select name="category" class="form-control">
+                <option></option>
+                <option value="Product">Product</option>
+                <option value="Service">Service</option>
+              </select>
+            </div>
+
+            <div class=" form-floating mb-3">
+              <input type="text" required class=" form-control" name="bp">
+              <label for=""> Buying Price </label>
+            </div>
+            <div class=" form-floating mb-3">
+              <input type="text" required class=" form-control" name="sp">
+              <label for=""> Selling Price </label>
+            </div>
+
+        </div>
+
+
+        <input type="submit" class="btn btn-primary" value="Submit">
+        </form>
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-8">
+      <table class="table" id="myTable">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Buying Price</th>
+            <th scope="col">Selling Price</th>
+            <th scope="col">Quantity</th>
+            <th>Make Sale</th>
+            
+
+
+          </tr>
+
+        </thead>
+        <tbody>
+          {% for i in data %}
+
+          <tr>
+            <td>{{i[4]}}</td>
+            <td>{{i[0]}}</td>
+            <td>{{i[1]}}</td>
+            <td>{{i[2]}}</td>
+            <td>{{i[3]}}</td>
+            <td>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#saleModal{{i[4]}}">
+                Make sale </button>
+
+              <div class="modal fade" id="saleModal{{i[4]}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="exampleModalLabel">Make sale</h4>
+
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                      <form action="/make_sales" method="post">
+
+                        <input name='pid' type="text" class="form-control" value="{{i[4]}}">
+
+                        <div class="form-group">
+                          <label>Quantity:</label>
+                          <input name='quantity' type="name" class="form-control" placeholder="Enter quantity">
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="submit">
+                      </form>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+           
+
+
+          </tr>
+
+
+          {% endfor %}
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+{% endblock %}

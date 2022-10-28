@@ -1,0 +1,15 @@
+**Project structure
+  main.py - Main entry file.
+          - Flask object
+        
+    templates folder - store our *.html
+        -base.html -> Parent HTML File that contains block parts that child templates should pass their own dynamic data and other elements, link tags, scriptd and styles that are common.
+        -includes folder -> contains snippets of html elements that can be included in any part of a page
+        -Your own html files for the different pages
+    Statis folder
+        -Contains css, js, images files/folders
+
+    Models folder
+        -store data 
+
+
